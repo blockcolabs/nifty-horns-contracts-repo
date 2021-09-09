@@ -624,7 +624,7 @@ pub contract NiftyHorns: NonFungibleToken {
         // Returns: A reference to the NFT
         //
         // Note: This only allows the caller to read the ID of the NFT,
-        // not any topshot specific data. Please use borrowCard to 
+        // not any Nifty Horns specific data. Please use borrowCard to
         // read Card data.
         //
         pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT {
@@ -671,7 +671,7 @@ pub contract NiftyHorns: NonFungibleToken {
         return <-create NiftyHorns.Collection()
     }
 
-    // getAllCardTypes returns all the cardTypes in topshot
+    // getAllCardTypes returns all the cardTypes in Nifty Horns
     //
     // Returns: An array of all the cardTypes that have been created
     pub fun getAllCardTypes(): [NiftyHorns.CardType] {

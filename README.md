@@ -57,7 +57,7 @@ pub resource Card {
     // Otherwise know as the serial number
     pub let serialNumber: UInt32
 }
-``
+```
 
 The other types that are defined in `NiftyHorns` are as follows:
 

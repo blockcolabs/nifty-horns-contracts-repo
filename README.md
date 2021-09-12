@@ -180,3 +180,41 @@ the `lib/go/events` package.
 - `pub event Deposit(id: UInt64, to: Address?)`
 
     Emitted when a Card is deposited into a collection. `id` refers to the global Card ID. If the collection was in an account's storage when it was deposited, `to` will show the address of the account that it was deposited to. If the collection was not in storage when the Card was deposited, `to` will be `nil`.
+
+## Nifty Horns Marketplace
+
+The `contracts/NiftyHornsMarket.cdc` contract allows users to create a sale object
+in their account to sell their Cards.
+
+When a user wants to sell their Card, they create a sale collection
+in their account and specify a beneficiary of a cut of the sale if they wish.
+
+A Nifty Horns Sale Collection contains a capability to the owner's card collection
+that allows the sale to withdraw the card when it is purchased.
+
+When another user wants to buy the Card that is for sale, they simply send
+their fungible tokens to the `purchase` function
+and if they sent the correct amount, they get the Card back.
+
+#### Events for Market-related actions
+
+- `pub event CardListed(id: UInt64, price: UFix64, seller: Address?)`
+
+   Emitted when a user lists a Card for sale in their SaleCollection.
+
+- `pub event CardPriceChanged(id: UInt64, newPrice: UFix64, seller: Address?)`
+
+   Emitted when a user changes the price of their Card.
+
+- `pub event CardPurchased(id: UInt64, price: UFix64, seller: Address?)`
+
+   Emitted when a user purchases a Card that is for sale.
+
+- `pub event CardWithdrawn(id: UInt64, owner: Address?)`
+
+   Emitted when a seller withdraws their Card from their SaleCollection.
+
+- `pub event CutPercentageChanged(newPercent: UFix64, seller: Address?)`
+
+   Emitted when a seller changes the percentage cut that is taken
+   from their sales and sent to a beneficiary.

@@ -37,30 +37,17 @@ func GenerateNiftyHornsAdminReceiverContract(niftyHornsAddr string) []byte {
 	adminReceiverCode := assets.MustAssetString(adminReceiverFile)
 	codeWithNiftyHornsAddr := strings.ReplaceAll(adminReceiverCode, defaultNiftyHornsAddress, niftyHornsAddr)
 
-	return []byte(codeWithShardedAddr)
+	return []byte(codeWithNiftyHornsAddr)
 }
 
 // GenerateNiftyHornsMarketContract returns a copy
 // of the NiftyHornsMarketContract with the import addresses updated
-func GenerateNiftyHornsMarketContract(ftAddr, nftAddr, niftyHornsAddr) []byte {
+func GenerateNiftyHornsMarketContract(ftAddr, nftAddr, niftyHornsAddr string) []byte {
 
 	marketCode := assets.MustAssetString(marketFile)
 	codeWithNFTAddr := strings.ReplaceAll(marketCode, defaultNonFungibleTokenAddress, nftAddr)
 	codeWithNiftyHornsAddr := strings.ReplaceAll(codeWithNFTAddr, defaultNiftyHornsAddress, niftyHornsAddr)
 	codeWithFTAddr := strings.ReplaceAll(codeWithNiftyHornsAddr, defaultFungibleTokenAddress, ftAddr)
 
-	return []byte(codeWithNFTAddr)
-}
-
-// GenerateNiftyHornsMarketContract returns a copy
-// of the third version NiftyHornsMarketContract with the import addresses updated
-func GenerateNiftyHornsMarketContract(ftAddr, nftAddr, niftyHornsAddr, marketAddr) []byte {
-
-	marketCode := assets.MustAssetString(marketFile)
-	codeWithNFTAddr := strings.ReplaceAll(marketCode, defaultNonFungibleTokenAddress, nftAddr)
-	codeWithNiftyHornsAddr := strings.ReplaceAll(codeWithNFTAddr, defaultNiftyHornsAddress, niftyHornsAddr)
-	codeWithFTAddr := strings.ReplaceAll(codeWithNiftyHornsAddr, defaultFungibleTokenAddress, ftAddr)
-	codeWithMarketAddr := strings.ReplaceAll(codeWithFTAddr, defaultMarketAddress, marketAddr)
-
-	return []byte(codeWithMarketAddr)
+	return []byte(codeWithFTAddr)
 }

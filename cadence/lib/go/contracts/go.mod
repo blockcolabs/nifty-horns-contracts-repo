@@ -1,4 +1,4 @@
-module github.com/dapperlabs/nba-smart-contracts/lib/go/contracts
+module github.com/blockcolabs/nifty-horns-contracts-repo/cadence/lib/go/contracts
 
 go 1.16
 
@@ -12,4 +12,4 @@ require (
 
 )
 
-replace github.com/dapperlabs/nba-smart-contracts/lib/go/contracts => ../contracts
+replace github.com/blockcolabs/nifty-horns-contracts-repo/cadence/lib/go/contracts => ../contracts

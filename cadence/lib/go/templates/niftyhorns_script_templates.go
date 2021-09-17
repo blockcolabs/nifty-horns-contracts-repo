@@ -1,7 +1,7 @@
 package templates
 
 import (
-	"github.com/dapperlabs/nba-smart-contracts/lib/go/templates/internal/assets"
+	"github.com/blockcolabs/nifty-horns-contracts-repo/cadence/lib/go/templates/internal/assets"
 )
 
 const (

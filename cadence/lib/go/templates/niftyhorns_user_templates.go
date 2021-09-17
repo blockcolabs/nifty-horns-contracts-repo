@@ -9,7 +9,7 @@ const (
 	transferCardFilename  = "user/transfer_card.cdc"
 	batchTransferFilename = "user/batch_transfer.cdc"
 
-	transferCardFilename  = "user/transfer_card_sale.cdc"
+	transferCardSaleFilename  = "user/transfer_card_sale.cdc"
 )
 
 // GenerateSetupAccountScript creates a script that drops up an account to use Nifty Horns
@@ -33,10 +33,10 @@ func GenerateBatchTransferCardScript(env Environment) []byte {
 	return []byte(replaceAddresses(code, env))
 }
 
-// GenerateTransferCardScript creates a script that transfers a card
+// GenerateTransferCardSaleScript creates a script that transfers a card
 // and cancels its sale if it is for sale
-func GenerateTransferCardScript(env Environment) []byte {
-	code := assets.MustAssetString(transactionsPath + transferCardFilename)
+func GenerateTransferCardSaleScript(env Environment) []byte {
+	code := assets.MustAssetString(transactionsPath + transferCardSaleFilename)
 
 	return []byte(replaceAddresses(code, env))
 }

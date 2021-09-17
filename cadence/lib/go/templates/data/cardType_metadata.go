@@ -10,7 +10,6 @@ type CardTypeMetadata struct {
 // GenerateEmptyCardType generates a cardType with all its fields
 // empty except for FullName for testing
 func GenerateEmptyCardType(playerName string) CardTypeMetadata {
-	num := int32(10)
 	return CardTypeMetadata{PlayerName: playerName,
 		EditionType: "",
 	}

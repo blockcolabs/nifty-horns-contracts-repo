@@ -11,33 +11,33 @@ const (
 	currentSeriesFilename = "get_currentSeries.cdc"
 	totalSupplyFilename   = "get_totalSupply.cdc"
 
-	// Play related scripts
-	getAllPlaysFilename = "plays/get_all_plays.cdc"
-	nextPlayIDFilename  = "plays/get_nextPlayID.cdc"
-	playMetadata        = "plays/get_play_metadata.cdc"
-	playMetadataField   = "plays/get_play_metadata_field.cdc"
+	// CardType related scripts
+	getAllCardTypesFilename = "cardTypes/get_all_cardTypes.cdc"
+	nextCardTypeIDFilename  = "cardTypes/get_nextCardTypeID.cdc"
+	cardTypeMetadata        = "cardTypes/get_cardType_metadata.cdc"
+	cardTypeMetadataField   = "cardTypes/get_cardType_metadata_field.cdc"
 
-	// Set related scripts
-	editionRetiredFilename      = "sets/get_edition_retired.cdc"
-	numMomentsInEditionFilename = "sets/get_numMoments_in_edition.cdc"
-	setIDsByNameFilename        = "sets/get_setIDs_by_name.cdc"
-	setSeriesFilename           = "sets/get_setSeries.cdc"
-	nextSetIDFilename           = "sets/get_nextSetID.cdc"
-	playsInSetFilename          = "sets/get_plays_in_set.cdc"
-	setNameFilename             = "sets/get_setName.cdc"
-	setLockedFilename           = "sets/get_set_locked.cdc"
+	// Drop related scripts
+	editionRetiredFilename    = "drops/get_edition_retired.cdc"
+	numCardsInEditionFilename = "drops/get_numCards_in_edition.cdc"
+	dropIDsByNameFilename     = "drops/get_dropIDs_by_name.cdc"
+	dropSeriesFilename        = "drops/get_dropSeries.cdc"
+	nextDropIDFilename        = "drops/get_nextDropID.cdc"
+	cardTypesInDropFilename   = "drops/get_cardTypes_in_drop.cdc"
+	dropNameFilename          = "drops/get_dropName.cdc"
+	dropLockedFilename        = "drops/get_drop_locked.cdc"
 
 	// collections scripts
-	collectionIDsFilename       = "collections/get_collection_ids.cdc"
-	metadataFieldFilename       = "collections/get_metadata_field.cdc"
-	momentSeriesFilename        = "collections/get_moment_series.cdc"
-	idInCollectionFilename      = "collections/get_id_in_Collection.cdc"
-	momentPlayIDFilename        = "collections/get_moment_playID.cdc"
-	momentSetIDFilename         = "collections/get_moment_setID.cdc"
-	metadataFilename            = "collections/get_metadata.cdc"
-	momentSerialNumFilename     = "collections/get_moment_serialNum.cdc"
-	momentSetNameFilename       = "collections/get_moment_setName.cdc"
-	getSetPlaysAreOwnedFilename = "collections/get_setplays_are_owned.cdc"
+	collectionIDsFilename            = "collections/get_collection_ids.cdc"
+	metadataFieldFilename            = "collections/get_metadata_field.cdc"
+	cardSeriesFilename               = "collections/get_card_series.cdc"
+	idInCollectionFilename           = "collections/get_id_in_Collection.cdc"
+	cardCardTypeIDFilename           = "collections/get_card_cardTypeID.cdc"
+	cardDropIDFilename               = "collections/get_card_dropID.cdc"
+	metadataFilename                 = "collections/get_metadata.cdc"
+	cardSerialNumFilename            = "collections/get_card_serialNum.cdc"
+	cardDropNameFilename             = "collections/get_card_dropName.cdc"
+	getDropCardTypesAreOwnedFilename = "collections/get_dropcardTypes_are_owned.cdc"
 )
 
 // Global Data Gettetrs
@@ -54,33 +54,33 @@ func GenerateGetSupplyScript(env Environment) []byte {
 	return []byte(replaceAddresses(code, env))
 }
 
-// Play Related Scripts
+// CardType Related Scripts
 
-func GenerateGetAllPlaysScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + getAllPlaysFilename)
-
-	return []byte(replaceAddresses(code, env))
-}
-
-func GenerateGetNextPlayIDScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + nextPlayIDFilename)
+func GenerateGetAllCardTypesScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + getAllCardTypesFilename)
 
 	return []byte(replaceAddresses(code, env))
 }
 
-func GenerateGetPlayMetadataScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + playMetadata)
+func GenerateGetNextCardTypeIDScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + nextCardTypeIDFilename)
 
 	return []byte(replaceAddresses(code, env))
 }
 
-func GenerateGetPlayMetadataFieldScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + playMetadataField)
+func GenerateGetCardTypeMetadataScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + cardTypeMetadata)
 
 	return []byte(replaceAddresses(code, env))
 }
 
-// Set-related scripts
+func GenerateGetCardTypeMetadataFieldScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + cardTypeMetadataField)
+
+	return []byte(replaceAddresses(code, env))
+}
+
+// Drop-related scripts
 
 // GenerateGetIsEditionRetiredScript creates a script that indicates if an edition is retired
 func GenerateGetIsEditionRetiredScript(env Environment) []byte {
@@ -89,52 +89,52 @@ func GenerateGetIsEditionRetiredScript(env Environment) []byte {
 	return []byte(replaceAddresses(code, env))
 }
 
-// GenerateGetNumMomentsInEditionScript creates a script
-// that returns the number of moments that have been minted in an edition
-func GenerateGetNumMomentsInEditionScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + numMomentsInEditionFilename)
+// GenerateGetNumCardsInEditionScript creates a script
+// that returns the number of cards that have been minted in an edition
+func GenerateGetNumCardsInEditionScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + numCardsInEditionFilename)
 
 	return []byte(replaceAddresses(code, env))
 }
 
-// GenerateGetSetIDsByNameScript creates a script that returns setIDs that share a name
-func GenerateGetSetIDsByNameScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + setIDsByNameFilename)
+// GenerateGetDropIDsByNameScript creates a script that returns dropIDs that share a name
+func GenerateGetDropIDsByNameScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + dropIDsByNameFilename)
 
 	return []byte(replaceAddresses(code, env))
 }
 
-// GenerateGetSetNameScript creates a script that returns the name of a set
-func GenerateGetSetNameScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + setNameFilename)
+// GenerateGetDropNameScript creates a script that returns the name of a drop
+func GenerateGetDropNameScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + dropNameFilename)
 
 	return []byte(replaceAddresses(code, env))
 }
 
-// GenerateGetSetSeriesScript creates a script that returns the metadata of a play
-func GenerateGetSetSeriesScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + setSeriesFilename)
+// GenerateGetDropSeriesScript creates a script that returns the metadata of a cardType
+func GenerateGetDropSeriesScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + dropSeriesFilename)
 
 	return []byte(replaceAddresses(code, env))
 }
 
-// GenerateGetNextSetIDScript creates a script that returns next set ID that will be used
-func GenerateGetNextSetIDScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + nextSetIDFilename)
+// GenerateGetNextDropIDScript creates a script that returns next drop ID that will be used
+func GenerateGetNextDropIDScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + nextDropIDFilename)
 
 	return []byte(replaceAddresses(code, env))
 }
 
-// GenerateGetPlaysInSetScript creates a script that returns an array of plays in a set
-func GenerateGetPlaysInSetScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + playsInSetFilename)
+// GenerateGetCardTypesInDropScript creates a script that returns an array of cardTypes in a drop
+func GenerateGetCardTypesInDropScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + cardTypesInDropFilename)
 
 	return []byte(replaceAddresses(code, env))
 }
 
-// GenerateGetIsSetLockedScript creates a script that indicates if a set is locked
-func GenerateGetIsSetLockedScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + setLockedFilename)
+// GenerateGetIsDropLockedScript creates a script that indicates if a drop is locked
+func GenerateGetIsDropLockedScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + dropLockedFilename)
 
 	return []byte(replaceAddresses(code, env))
 }
@@ -147,20 +147,20 @@ func GenerateGetCollectionIDsScript(env Environment) []byte {
 	return []byte(replaceAddresses(code, env))
 }
 
-func GenerateGetMomentMetadataScript(env Environment) []byte {
+func GenerateGetCardMetadataScript(env Environment) []byte {
 	code := assets.MustAssetString(scriptsPath + metadataFilename)
 
 	return []byte(replaceAddresses(code, env))
 }
 
-func GenerateGetMomentMetadataFieldScript(env Environment) []byte {
+func GenerateGetCardMetadataFieldScript(env Environment) []byte {
 	code := assets.MustAssetString(scriptsPath + metadataFieldFilename)
 
 	return []byte(replaceAddresses(code, env))
 }
 
-func GenerateGetMomentSeriesScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + momentSeriesFilename)
+func GenerateGetCardSeriesScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + cardSeriesFilename)
 
 	return []byte(replaceAddresses(code, env))
 }
@@ -173,36 +173,36 @@ func GenerateIsIDInCollectionScript(env Environment) []byte {
 	return []byte(replaceAddresses(code, env))
 }
 
-func GenerateGetMomentPlayScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + momentPlayIDFilename)
+func GenerateGetCardCardTypeScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + cardCardTypeIDFilename)
 
 	return []byte(replaceAddresses(code, env))
 }
 
-func GenerateGetMomentSetScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + momentSetIDFilename)
+func GenerateGetCardDropScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + cardDropIDFilename)
 
 	return []byte(replaceAddresses(code, env))
 }
 
-func GenerateGetMomentSetNameScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + momentSetNameFilename)
+func GenerateGetCardDropNameScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + cardDropNameFilename)
 
 	return []byte(replaceAddresses(code, env))
 }
 
-func GenerateGetMomentSerialNumScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + momentSerialNumFilename)
+func GenerateGetCardSerialNumScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + cardSerialNumFilename)
 
 	return []byte(replaceAddresses(code, env))
 }
 
-// GenerateSetPlaysOwnedByAddressScript generates a script that returns true if each of the SetPlays corresponding to
-// the passed Set and Play IDs are owned by the passed flow.Address.
+// GenerateDropCardTypesOwnedByAddressScript generates a script that returns true if each of the DropCardTypes corresponding to
+// the passed Drop and CardType IDs are owned by the passed flow.Address.
 //
-// Set and Play IDs are matched up by index in the passed slices.
-func GenerateSetPlaysOwnedByAddressScript(env Environment) []byte {
-	code := assets.MustAssetString(scriptsPath + getSetPlaysAreOwnedFilename)
+// Drop and CardType IDs are matched up by index in the passed slices.
+func GenerateDropCardTypesOwnedByAddressScript(env Environment) []byte {
+	code := assets.MustAssetString(scriptsPath + getDropCardTypesAreOwnedFilename)
 
 	return []byte(replaceAddresses(code, env))
 }

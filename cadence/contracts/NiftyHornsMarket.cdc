@@ -163,40 +163,39 @@ pub contract NiftyHornsMarket {
         /// Returns: @NiftyHorns.NFT: the purchased NFT
         pub fun purchase(tokenID: UInt64, buyTokens: @FungibleToken.Vault): @NiftyHorns.NFT {
 
-            if self.prices[tokenID] != nil {
-                assert(
-                    buyTokens.balance == self.prices[tokenID]!,
-                    message: "Not enough tokens to buy the NFT!"
-                )
-
-                // Read the price for the token
-                let price = self.prices[tokenID]!
-
-                // Drop the price for the token to nil
-                self.prices[tokenID] = nil
-
-                // Take the cut of the tokens that the beneficiary gets from the sent tokens
-                let beneficiaryCut <- buyTokens.withdraw(amount: price*self.cutPercentage)
-
-                // Deposit it into the beneficiary's Vault
-                self.beneficiaryCapability.borrow()!
-                    .deposit(from: <-beneficiaryCut)
-
-                // Deposit the remaining tokens into the owners vault
-                self.ownerCapability.borrow()!
-                    .deposit(from: <-buyTokens)
-
-                emit CardPurchased(id: tokenID, price: price, seller: self.owner?.address)
-
-                // Return the purchased token
-                let boughtCard <- self.ownerCollection.borrow()!.withdraw(withdrawID: tokenID) as! @NiftyHorns.NFT
-
-                return <-boughtCard
-
-            } else {
-                // destroy buyTokens // This line can be removed when this issue is released: https://github.com/onflow/cadence/pull/1000
-                panic("No token matching this ID for sale!")
+            pre {
+                self.prices[tokenID] != nil:
+                    "No token matching this ID for sale!"
             }
+
+            assert(
+                buyTokens.balance == self.prices[tokenID]!,
+                message: "Not enough tokens to buy the NFT!"
+            )
+
+            // Read the price for the token
+            let price = self.prices[tokenID]!
+
+            // Drop the price for the token to nil
+            self.prices[tokenID] = nil
+
+            // Take the cut of the tokens that the beneficiary gets from the sent tokens
+            let beneficiaryCut <- buyTokens.withdraw(amount: price*self.cutPercentage)
+
+            // Deposit it into the beneficiary's Vault
+            self.beneficiaryCapability.borrow()!
+                .deposit(from: <-beneficiaryCut)
+
+            // Deposit the remaining tokens into the owners vault
+            self.ownerCapability.borrow()!
+                .deposit(from: <-buyTokens)
+
+            emit CardPurchased(id: tokenID, price: price, seller: self.owner?.address)
+
+            // Return the purchased token
+            let boughtCard <- self.ownerCollection.borrow()!.withdraw(withdrawID: tokenID) as! @NiftyHorns.NFT
+
+            return <-boughtCard
         }
 
         /// changeOwnerReceiver updates the capability for the sellers fungible token Vault
